@@ -3,6 +3,7 @@ from getpass import getpass
 from typing import Optional
 import gradio as gr
 
+
 # 프롬프트 읽어오기
 with open("prompts/v2.2.txt", "r", encoding="utf-8") as f:
     system_prompt = f.read()
@@ -51,5 +52,7 @@ with gr.Blocks() as demo:
 
     msg.submit(respond, [msg, chatbot], [msg, chatbot])
     clear.click(lambda: None, None, chatbot, queue=False)
-
-demo.launch(debug=True)
+    
+# 환경변수 PORT가 있으면 그 포트로, 없으면 7860번 포트로 서버 실행
+port = int(os.environ.get("PORT", 7860))
+demo.launch(server_name="0.0.0.0", server_port=port, debug=True)
