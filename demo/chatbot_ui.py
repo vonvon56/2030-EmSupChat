@@ -52,7 +52,7 @@ with gr.Blocks() as demo:
 
     msg.submit(respond, [msg, chatbot], [msg, chatbot])
     clear.click(lambda: None, None, chatbot, queue=False)
-    
-# 환경변수 PORT가 있으면 그 포트로, 없으면 7860번 포트로 서버 실행
-port = int(os.environ.get("PORT", 7860))
+
+# 환경변수 PORT가 있으면 그 포트로, 없으면 8080번 포트로 서버 실행
+port = int(os.environ.get("PORT", 8080))
 demo.launch(server_name="0.0.0.0", server_port=port, debug=True)
