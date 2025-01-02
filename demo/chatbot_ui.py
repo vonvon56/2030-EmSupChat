@@ -1,5 +1,4 @@
 import os, openai
-from getpass import getpass
 from typing import Optional
 import gradio as gr
 
@@ -27,10 +26,15 @@ class Chat:
               "role": "user",
               "content": content
           })
-          response = openai.ChatCompletion.create(
-              model="gpt-3.5-turbo",
-              messages=self.messages
-          )
+          try:
+            response = openai.ChatCompletion.create(
+                model="gpt-3.5-turbo",
+                messages=self.messages
+            )
+          except Exception as e:
+            print("OpenAI Error:", e)
+            raise e  # 재확인 위해 다시 던지거나, 로그 남기기
+
           response_content = response["choices"][0]["message"]["content"]
           self.messages.append({
               "role": "assistant",
