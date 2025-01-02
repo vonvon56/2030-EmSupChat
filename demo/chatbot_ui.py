@@ -9,6 +9,8 @@ with open("prompts/v2.2.txt", "r", encoding="utf-8") as f:
     system_prompt = f.read()
 
 openai.api_key = os.environ.get('OPENAI_API_KEY')
+print("OPENAI_API_KEY from env:", os.environ.get("OPENAI_API_KEY"))
+
 class Chat:
 
     def __init__(self, system: Optional[str] = None):
