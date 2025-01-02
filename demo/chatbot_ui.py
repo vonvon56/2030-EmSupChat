@@ -9,7 +9,6 @@ with open("prompts/v2.2.txt", "r", encoding="utf-8") as f:
     system_prompt = f.read()
 
 openai.api_key = os.environ.get('OPENAI_API_KEY')
-print("OPENAI_API_KEY from env:", os.environ.get("OPENAI_API_KEY"))
 
 class Chat:
 
@@ -29,7 +28,7 @@ class Chat:
               "content": content
           })
           response = openai.ChatCompletion.create(
-              model="gpt-4o",
+              model="gpt-3.5-turbo",
               messages=self.messages
           )
           response_content = response["choices"][0]["message"]["content"]
