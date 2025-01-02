@@ -1,0 +1,30 @@
+app = "my-gradio-app"  # 원하는 이름 (중복 안 되게)
+
+kill_signal = "SIGTERM"
+kill_timeout = 5
+processes = []
+
+[env]
+  PORT = "7860" 
+
+[build]
+  builder = "python"  # Python 빌드팩 (실험적으로 제공될 수 있음)
+  # 만약 직접 Dockerfile 사용 시:
+  # dockerfile = "Dockerfile"
+
+[[services]]
+  internal_port = 7860
+  processes = ["app"]
+  protocol = "tcp"
+
+  [services.concurrency]
+    hard_limit = 25
+    soft_limit = 20
+
+  [[services.ports]]
+    handlers = ["http"]
+    port = 80
+
+  [[services.ports]]
+    handlers = ["tls", "http"]
+    port = 443
