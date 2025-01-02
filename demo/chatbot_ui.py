@@ -4,11 +4,10 @@ from typing import Optional
 import gradio as gr
 
 # 프롬프트 읽어오기
-with open("../prompts/v2.2.txt", "r", encoding="utf-8") as f:
+with open("prompts/v2.2.txt", "r", encoding="utf-8") as f:
     system_prompt = f.read()
 
 openai.api_key = os.environ.get('OPENAI_API_KEY')
-
 class Chat:
 
     def __init__(self, system: Optional[str] = None):
